@@ -15,7 +15,7 @@ if($_POST['usuario'] && $_POST['contrasenia']) {
 
      if($numRegistros==0) {
 
-        echo "Error, no existen registros que coincidan con tu user y password";
+        echo "Error, no existen registros que coincidan con tu usuario y contraseña";
 
      } else {
 
