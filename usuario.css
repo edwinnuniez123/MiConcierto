@@ -1,0 +1,127 @@
+body {
+	font-family:helvetica, arial, sans-serif;
+	font-size:16px;
+	line-height:1.0em;
+	margin:0;
+	padding:0;
+        background-color:yellow;
+	
+  
+}
+
+
+.todo
+{
+   width:1300px;
+   height:620px;
+   margin:auto ;
+   border: 1px;
+   background-color:green;
+    
+}
+
+.vertical
+{
+  background-image:url(linea-vertical.jpg);
+  background-color:white;
+  border-radius: 7px;
+  margin: -20px 40px 40px 100px;
+  padding: 15px 0px 0px 0px;
+  width:50px;
+  height:620px;
+  background-repeat:repeat -y;
+  background-position:top left;
+ 
+}
+
+.Parrafo {
+  width: 850px;
+  background-color:white;
+  border-radius: 7px;
+  margin: 30px 20px 20px 0px;
+  padding: 15px 0px 0px 0px;
+}
+
+.Columna
+{
+  width: 150px;
+  border-radius: 7px;
+  float:left;
+  border:1px;
+  padding:10px;
+}
+
+#wrapper
+{
+   width:800px;
+   height: 180px;
+   text-align: left;
+   margin-left: auto;
+   margin-right: auto;
+   padding: 0px 0px 5px 0px;
+}
+
+#content
+{
+   float: right;
+   width: 558px;
+   padding: 0px 10px 0px 10px;
+}
+
+#navigation
+{
+   float: left;
+   width: 148px;
+   height: 148px;
+   padding: 10px 20px 0px 20px;
+    background-color:blue;
+}
+
+.image
+{
+  background-image:url(sarah.png);
+  background-color:white;
+  border-radius: 7px;
+  margin: 0px 40px 40px 20px;
+  padding: 15px 0px 0px 0px;
+  width:200px;
+  height:200px;
+  background-repeat:no-repeat;
+  background-position:top right;
+  
+}
+
+p span {
+    color:red;
+    font-size:20px;
+}
+
+p1{
+       font-size:50px;
+}
+
+p2{
+       font-size:30px;
+}
+
+p3{
+       font-size:30px;
+}
+
+p4{
+       font-size:25px;
+}
+
+input.placeholder {
+    text-align: center;
+}
+.emailField {
+    top:43px;
+    right:290px;
+    width: 355px;
+    height: 30px;
+    position: absolute;
+    border: none;
+    font-size: 17;
+    text-align: center;
+}
