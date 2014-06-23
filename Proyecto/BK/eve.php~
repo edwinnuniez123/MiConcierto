@@ -1,0 +1,21 @@
+<?php
+    
+     
+       
+
+    
+    $nombre = $_POST['nombre'];
+    $origen = $_POST['origen'];
+    $nombretour = $_POST['nombretour'];
+    $venue = $_POST['venue'];
+    $fecha = $_POST['fecha'];
+    
+    
+    
+    
+ echo $nombre;
+ echo $origen;
+ echo $nombretour;
+ echo $venue;
+ echo $fecha ;
+   ?>

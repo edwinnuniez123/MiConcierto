@@ -1,0 +1,15 @@
+<?php 
+$conexion=mysql_connect('localhost','root','programacion') or die('No hay conexión a la base de datos');
+$db=mysql_select_db('myconcert',$conexion)or die('no existe la base de datos.');
+
+$consulta=mysql_query("SELECT * FROM fotosPorEventoPorUsuario ");
+while($filas=mysql_fetch_array($consulta)){
+	$ruta=$filas['ruta'];
+	
+
+
+?>
+
+<img src="<?php echo $ruta; ?>" width="180" height="214"><br>
+
+<?php }?>

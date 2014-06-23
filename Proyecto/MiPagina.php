@@ -1,0 +1,223 @@
+<!doctype html>
+<?php
+       session_start();
+       require_once('auth.php');     
+       
+?>
+<html lang="en">
+   <head>
+       <meta charset="utf-8">
+       <title>Crear Evento</title>
+       <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+       <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+       <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+       <link rel="stylesheet" href="/resources/demos/style.css">
+       <link rel="stylesheet" href="estilo.css" type="text/css" media="screen" />
+       <style>
+         
+
+          div#users-contain { width: 350px; margin: 20px 0; }
+          div#users-contain table { margin: 1em 0; border-collapse: collapse; width: 100%; }
+          div#users-contain table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
+          .ui-dialog .ui-state-error { padding: .3em; }
+          .validateTips { border: 1px solid transparent; padding: 0.3em; }
+       </style>
+       <script>
+         $(function() {
+           var nombreartista = $( "#nombreartista" ),
+           origen = $("#origen"),
+           nombretour = $( "#nombretour" ),
+           venue = $("#venue"),
+           fecha =  $( "#fecha" ).datepicker(),
+           allFields = $( [] ).add( nombreartista ).add(origen).add( nombretour ).add(venue).add( fecha ),
+           tips = $( ".validateTips" );
+           function updateTips( t ) {
+             tips
+             .text( t )
+             .addClass( "ui-state-highlight" );
+              setTimeout(function() {
+              tips.removeClass( "ui-state-highlight", 1500 );
+           }, 500 );
+         }
+
+         function checkLength( o, n, min, max ) {
+            if ( o.val().length > max || o.val().length < min ) {
+               o.addClass( "ui-state-error" );
+               updateTips( "Length of " + n + " must be between " +
+               min + " and " + max + "." );
+               return false;
+            } else {
+               return true;
+            }
+         }
+
+         function checkRegexp( o, regexp, n ) {
+             if ( !( regexp.test( o.val() ) ) ) {
+                o.addClass( "ui-state-error" );
+                updateTips( n );
+                return false;
+             } else {
+                return true;
+             }
+         }
+
+         $( "#dialog-form" ).dialog({
+           autoOpen: false,
+           height: 300,
+           width: 350,
+           modal: true,
+           buttons: {
+              "Crear un evento": function() {
+                 
+                 document.form1.submit();          
+                
+                 var bValid = true;
+                 allFields.removeClass( "ui-state-error" );
+                 bValid = bValid && checkLength( nombreartista, "artista", 1, 30 );
+                 bValid = bValid && checkLength( nombreartista, "origen", 1, 30 );
+                 bValid = bValid && checkLength( nombretour, "tour", 1, 25 );
+                 bValid = bValid && checkLength( venue, "venue", 1, 25 );
+                 bValid = bValid && checkLength( fecha, "fecha", 1, 16);
+                 
+
+               if ( bValid ) {
+                  $( "#users tbody" ).append( "<tr>" +
+                  "<td>" + nombreartista.val() + "</td>" +
+                  "<td>" + origen.val() + "</td>" +
+                  "<td>" + nombretour.val() + "</td>" +
+                  "<td>" + venue.val() + "</td>" +
+                  "<td>" + fecha.val() + "</td>" +
+                  "</tr>" );
+                  $( this ).dialog( "close" );
+               }
+           },
+
+            Cancel: function() {
+             $( this ).dialog( "close" );
+            }
+           },
+
+            close: function() {
+             allFields.val( "" ).removeClass( "ui-state-error" );
+            }
+           });
+
+           $( "#crear-evento" )
+           
+           .click(function() {
+              $( "#dialog-form" ).dialog( "open" );
+           });
+          });
+
+                   
+          
+     </script>
+   </head>
+   <body>
+
+     <header>
+         
+        
+          
+            
+          
+            
+            <div>
+            <?php
+              echo "<h1 align='center'>" .$_SESSION['NOMBRE']."</h1>"; 
+              echo "<h2 align='center'>" . $_SESSION['SESS_FIRST_NAME']."</h2>";
+            ?> 
+            </div>  
+       
+            
+               
+            
+        </header>
+
+         <div>
+        <nav>
+            <!-- Navegación -->
+            <ul>
+             <li><a href ="MiPagina.php">Crear Evento</a>  
+             <li><a href ="evento.php">MiPagina</a></li>  
+             <li><a href ="inicio.php">Inicio</a></li>  
+             <li><a href="login.php">Logout</a></li>
+
+            </ul> 
+        </nav>
+        <h1></h1>
+         <h1></h1>
+       </div>
+     <div id="dialog-form" title="Crear nuevo evento">
+        <p class="validateTips">Todos los Campos son requeridos.</p>
+        <form name="form1" id="form1" action="MiPagina.php?accion=enviar" method="POST">
+          <fieldset>
+            <label for="nombre">Artista</label>
+            <input type="text" name="nombre" id="nombreartista" class="text ui-widget-content ui-corner-all">
+            <label for="origen">Origen</label>
+            <input type="text" name="origen" id="origen" class="text ui-widget-content ui-corner-all">
+            <label for="tour">Tour</label>
+            <input type="text" name="nombretour" id="nombretour" value="" class="text ui-widget-content ui-corner-all">
+            <label for="venue">Venue</label>
+            <input type="text" name="venue" id="venue" value="" class="text ui-widget-content ui-corner-all">
+            <label for="fecha">Fecha</label>
+            <input type="text" name="fecha" id="fecha" value="" class="text ui-widget-content ui-corner-all">
+            
+          </fieldset>
+        </form>
+        
+     </div>
+     <div id="users-contain" class="ui-widget">
+       
+    
+        <?php
+    
+            if($_GET['accion']=="enviar") {
+
+            $idusuario = $_SESSION['SESS_MEMBER_ID'];
+            $nombre = $_POST['nombre'];
+            $origen = $_POST['origen'];
+            $nombretour = $_POST['nombretour'];
+            $venue = $_POST['venue'];
+            $fecha = $_POST['fecha'];
+            $con = mysqli_connect("localhost", "root","programacion","myconcert");
+    
+            $query1 = "INSERT INTO artista (nombreartista, origen) VALUES('$nombre', '$origen')";
+            $result1 = mysqli_query($con,$query1);
+            $query2 = "INSERT INTO tour (idartista, nombretour) VALUES(LAST_INSERT_ID(), '$nombretour')";
+            $result2 = mysqli_query($con,$query2);
+            $query3 = "INSERT INTO evento (idtour, venue, fecha) VALUES(LAST_INSERT_ID(), '$venue','$fecha')";
+            $result3 = mysqli_query($con,$query3);
+            $query4 = "INSERT INTO eventosPorUsuario (idevento, idusuario) VALUES(LAST_INSERT_ID(), '$idusuario')";
+            $result4 = mysqli_query($con,$query4);
+         
+            $_SESSION['IdeventoPorUser']= mysqli_insert_id($query4);
+           
+
+           }   
+        ?>
+      
+       
+    
+
+  
+
+   
+
+       
+     </div>
+<div align="center" id="est">
+<a href ="cargarfotos.php">Subir Fotos</a>
+ 
+<button id="crear-evento">Crear nuevo evento</button>
+<div>
+  
+    
+
+
+  
+
+  </body>
+</html>
+
+
